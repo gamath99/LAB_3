@@ -42,6 +42,53 @@ class Wordanalyzer:
         for word in words: 
             print(f"{word:<15}::{self.__frequencies[word]}")
 
+def main():
+    files = {
+        "1":Path("princess_mars.txt"),
+        "2":Path("Tarzan.txt"),
+        "3":Path("treasure_island.txt"),
+        "4":Path("monte_cristo.txt")
+    }
+
+    files_names = {
+        "1":"Princess Mars",
+        "2":"Tarzan",
+        "3":"Treasure Island",
+        "4":"Monte Cristo"
+    }
+
+    choice = ""
+
+    while choice != "5":
+        print("\n--- Word Analyzer ---")
+        print("Please select a file to analyze:")
+        print("1. Princess Mars")
+        print("2. Tarzan")
+        print("3. Treasure Island")
+        print("4. Monte Cristo")
+        print("5. Exit")
+
+        choice = input("\nEnter your choice (1-5): ")
+
+        if choice == "5":
+            print("\nGoodbye!")
 
 
+        elif choice in files:
+            selected_file = files[choice]
 
+            print(f"\nProcessing'{selected_file.name}'...\n")
+
+            analyzer = Wordanalyzer(selected_file)
+
+            if analyzer.process_file():
+                analyzer.print_report()
+            
+            input("\nPress Enter toreturn to the menu...")
+
+        else:
+            print("\ninvalid choice. Please select from 1-5. ")
+            input("\nPress Enter to return to the menu...")
+
+if __name__ == "__main__":
+    main()
