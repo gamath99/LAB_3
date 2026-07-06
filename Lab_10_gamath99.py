@@ -7,11 +7,13 @@ July 5, 2026
 from pathlib import Path
 import string
 
-class Wordanalyzer:
-    def __int__(self, filepath):
-        self.filepath = Path(filepath)
+class WordAnalyzer:
+    """initialize the filepath to store it as priate pathlibrary"""
+    def __init__(self, filepath):
+        self.__filepath = Path(filepath)
         self.__frequencies = {}
 
+    """Create method to modify the text"""
     def process_file(self):
         try:
             if not self.__filepath.exists():
@@ -41,7 +43,7 @@ class Wordanalyzer:
 
         for word in words: 
             print(f"{word:<15}::{self.__frequencies[word]}")
-
+"""Create the main function to excute the game"""
 def main():
     files = {
         "1":Path("princess_mars.txt"),
@@ -50,15 +52,8 @@ def main():
         "4":Path("monte_cristo.txt")
     }
 
-    files_names = {
-        "1":"Princess Mars",
-        "2":"Tarzan",
-        "3":"Treasure Island",
-        "4":"Monte Cristo"
-    }
-
     choice = ""
-
+    #Create the menu loop for selection
     while choice != "5":
         print("\n--- Word Analyzer ---")
         print("Please select a file to analyze:")
@@ -68,6 +63,7 @@ def main():
         print("4. Monte Cristo")
         print("5. Exit")
 
+        #create a statement to validate the user input     
         choice = input("\nEnter your choice (1-5): ")
 
         if choice == "5":
@@ -77,14 +73,14 @@ def main():
         elif choice in files:
             selected_file = files[choice]
 
-            print(f"\nProcessing'{selected_file.name}'...\n")
+            print(f"\nProcessing '{selected_file.name}'...\n")
 
-            analyzer = Wordanalyzer(selected_file)
+            analyzer = WordAnalyzer(selected_file)
 
             if analyzer.process_file():
                 analyzer.print_report()
             
-            input("\nPress Enter toreturn to the menu...")
+            input("\nPress Enter to return to the menu...")
 
         else:
             print("\ninvalid choice. Please select from 1-5. ")
